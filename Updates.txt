@@ -1,0 +1,7 @@
+#1 Make a guide that appear form the left when you click a button > [🧊]
+
+#2 A way to select the week [🧊]
+
+#3 A change of logic, instead of reprint everytime that we click in the week or day only change the class [🧊]
+
+#4 Use the library from https://github.com/Simonwep/selection to select a range of days [🧊]
