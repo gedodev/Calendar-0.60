@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calendar</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-   integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
-   crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
-  <div class="test"></div>
   <div class="container">
     <div class="calendar">
       <div class="month">
@@ -34,11 +36,34 @@
         <div>Fri</div>
         <div>Sat</div>
       </div>
-        <div class="days">
+      <div class="days"></div>
+    </div>
+    <button id="counter">Contar</button>
+  </div>
+  <aside>
+    <div class="guide-container">
+      <div class="guide-container-flex">
+        <div class="guide">
+          <h3>Guide</h3>
+          <span>Welcome to the Calendar 0.60. This app its a way to confirm that
+            you are ok with the 60% of the office days in case that you find yourself
+            lost</span>
+          <br /><br />
+          <h4> How its works? </h4>
+            <li> First of all, the calendar suppose that you work from Mondays to Fridays. So it will initially
+              calculate the 60% of them.<br /></li>
+            <li> When you select a day (Blue), its going to count like a day that you go to work to the office <br />
+            </li>
+            <li> And when you select again (Red), its going to count like a license day (Not included when do the 60%)
+            </li>
+        </div>
       </div>
     </div>
-    <button id="counter"> Contar </button>
-  </div>
+    <div class="guide-arrow-container" id="arrow">
+      <div class="guide-arrow">></div>
+    </div>
+  </aside>
   <script src="script.js"></script>
 </body>
+
 </html>
