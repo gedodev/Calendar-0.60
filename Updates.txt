@@ -4,4 +4,4 @@
 
 #3 A change of logic, instead of reprint everytime that we click in the week or day only change the class [✅]
 
-#4 Use the library from https://github.com/Simonwep/selection to select a range of days [🧊]
+#4 Use the library from https://github.com/Simonwep/selection to select a range of days [✅]
