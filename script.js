@@ -274,7 +274,7 @@ const selection = new SelectionArea({
   },
   features:{
     singleTap: {
-      allow:false
+      allow:true
     }
   }
 }).on('beforestart', (event) => {
@@ -291,9 +291,22 @@ const selection = new SelectionArea({
     controlClickRight = true;
   }
 }).on('move', ({store: {changed: {added, removed}}}, event) => {
-  console.log(added)
   if(clickType == "left"){
     for (const el of added) {
+      if (el.className == ""){
+        el.className = "day-select"
+      } 
+      else if(el.className == "today"){
+        el.className += " day-select"
+      }
+      else if(el.className.includes("day-select")){ 
+        el.className = el.className.replace('day-select', '').trim()
+      }
+      else if(el.className.includes("leave-day")){ 
+        el.className = el.className.replace('leave-day', 'day-select').trim()
+      }
+    }
+    for (const el of removed) {
       if (el.className == ""){
         el.className = "day-select"
       } 
@@ -322,7 +335,20 @@ const selection = new SelectionArea({
         el.className = el.className.replace('day-select', 'leave-day').trim()
       }
     }
+    for (const el of removed) {
+      if (el.className == ""){
+        el.className = "leave-day"
+      } 
+      else if(el.className == "today"){
+        el.className += " leave-day"
+      }
+      else if(el.className.includes("leave-day")){ 
+        el.className = el.className.replace('leave-day', '').trim()
+      }
+      else if(el.className.includes("day-select")){ 
+        el.className = el.className.replace('day-select', 'leave-day').trim()
+      }
+    }
   }
 });
-
 
