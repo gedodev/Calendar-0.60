@@ -84,39 +84,39 @@ const renderCalendar = () => {
   //Add the day-select class and event listener in each day
   daysToWork = document.querySelectorAll('.days div:not([class="prev-month"], [class="next-month"], [class*="no-work"])');
     
-  for(let y = 0; y < daysToWork.length; y++){
-    let day = parseInt(daysToWork[y].innerText);  
-    daysToWork[y].addEventListener("click", () => {
-      if (daysToWork[y].className == ""){
-        daysToWork[y].className = "day-select"
-      } 
-      else if(daysToWork[y].className == "today"){
-        daysToWork[y].className += " day-select"
-      }
-      else if(daysToWork[y].className.includes("day-select")){ 
-        daysToWork[y].className = daysToWork[y].className.replace('day-select', '')
-      }
-      else if(daysToWork[y].className.includes("leave-day")){ 
-        daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
-      }
-    });
-    daysToWork[y].addEventListener("contextmenu", (e) => {
-      if(!controlClickRight){
-      if (daysToWork[y].className == ""){
-        daysToWork[y].className = "leave-day"
-      } 
-      else if(daysToWork[y].className == "today"){
-        daysToWork[y].className += " leave-day"
-      }
-      else if(daysToWork[y].className.includes("day-select")){ 
-        daysToWork[y].className = daysToWork[y].className.replace('day-select', 'leave-day')
-      }
-      else if(daysToWork[y].className.includes("leave-day")){ 
-        daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
-      }
-    }
-    });
-  }
+  // for(let y = 0; y < daysToWork.length; y++){
+  //   let day = parseInt(daysToWork[y].innerText);  
+  //   daysToWork[y].addEventListener("click", () => {
+  //     if (daysToWork[y].className == ""){
+  //       daysToWork[y].className = "day-select"
+  //     } 
+  //     else if(daysToWork[y].className == "today"){
+  //       daysToWork[y].className += " day-select"
+  //     }
+  //     else if(daysToWork[y].className.includes("day-select")){ 
+  //       daysToWork[y].className = daysToWork[y].className.replace('day-select', '')
+  //     }
+  //     else if(daysToWork[y].className.includes("leave-day")){ 
+  //       daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
+  //     }
+  //   });
+  //   daysToWork[y].addEventListener("contextmenu", (e) => {
+  //     if(!controlClickRight){
+  //     if (daysToWork[y].className == ""){
+  //       daysToWork[y].className = "leave-day"
+  //     } 
+  //     else if(daysToWork[y].className == "today"){
+  //       daysToWork[y].className += " leave-day"
+  //     }
+  //     else if(daysToWork[y].className.includes("day-select")){ 
+  //       daysToWork[y].className = daysToWork[y].className.replace('day-select', 'leave-day')
+  //     }
+  //     else if(daysToWork[y].className.includes("leave-day")){ 
+  //       daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
+  //     }
+  //   }
+  //   });
+  // }
     
   
   daysToWorkArray = Array.from(daysToWork);
