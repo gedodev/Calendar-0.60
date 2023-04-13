@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@viselect/vanilla/dist/viselect.umd.js"></script>
 </head>
-
 <body>
   <div class="container">
     <div class="calendar">
@@ -48,19 +48,21 @@
           <span>Welcome to the Calendar 0.60. This app its a way to confirm that
             you are ok with the 60% of the office days in case that you find yourself
             lost</span>
-          <br /><br />
-          <h4> How its works? </h4>
+          <br /><br /><br/>
+          <h4>How its works? </h4> 
             <li> First of all, the calendar suppose that you work from Mondays to Fridays. So it will initially
-              calculate the 60% of them.<br /></li>
-            <li> When you select a day (Blue), its going to count like a day that you go to work to the office <br />
+              calculate the 60% of them.<br /><br/></li> 
+            <li> Left click to select a <strong style="color:#155575">Office Day.</strong><br /><br/>
             </li>
-            <li> And when you select again (Red), its going to count like a license day (Not included when do the 60%)
+            <li> Right click to select a <strong style="color:#923a3a">Licence Day.</strong>(Not included when do the 60%)
             </li>
+            <br />
+            <li> (Tip) You can select the name of the day and all the days of the month with that name (e.g. Monday) will be selected</li>
         </div>
       </div>
     </div>
     <div class="guide-arrow-container" id="arrow">
-      <div class="guide-arrow">></div>
+      <div class="guide-arrow">&gt;</div>
     </div>
   </aside>
   <script src="script.js"></script>

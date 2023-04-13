@@ -94,17 +94,36 @@ const renderCalendar = () => {
         daysToWork[y].className += " day-select"
       }
       else if(daysToWork[y].className.includes("day-select")){ 
+        daysToWork[y].className = daysToWork[y].className.replace('day-select', '')
+      }
+      else if(daysToWork[y].className.includes("leave-day")){ 
+        daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
+      }
+    });
+    daysToWork[y].addEventListener("contextmenu", (e) => {
+      if(!controlClickRight){
+      if (daysToWork[y].className == ""){
+        daysToWork[y].className = "leave-day"
+      } 
+      else if(daysToWork[y].className == "today"){
+        daysToWork[y].className += " leave-day"
+      }
+      else if(daysToWork[y].className.includes("day-select")){ 
         daysToWork[y].className = daysToWork[y].className.replace('day-select', 'leave-day')
       }
       else if(daysToWork[y].className.includes("leave-day")){ 
         daysToWork[y].className = daysToWork[y].className.replace('leave-day', '').trim()
       }
+    }
     });
   }
     
   
   daysToWorkArray = Array.from(daysToWork);
 }
+
+// To prevent the right click context menu
+document.querySelector('.calendar').addEventListener("contextmenu", e => e.preventDefault());
 
 //Select all the days of z weekDay.
 const weekDay = document.querySelectorAll('.weekdays div');
@@ -118,15 +137,36 @@ for(let z = 0; z < weekDay.length; z++){
         //Gives you the days to work in the weekDay column
         daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className += " day-select" : x.className = "day-select")
       } 
-      else if (weekDay[z].className == 'weekDay-select') {
-        weekDay[z].className = 'weekDay-leave';
-        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace('day-select', 'leave-day').trim() : x.className = "leave-day")
+      else if (weekDay[z].className == 'weekDay-leave') {
+        weekDay[z].className = 'weekDay-select';
+        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace('leave-day', 'day-select').trim() : x.className = "day-select")
       } 
-      else if (weekDay[z].className == "weekDay-leave") {
+      else if (weekDay[z].className == "weekDay-select") {
         weekDay[z].className = "";
-        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace("leave-day", "").trim() : x.className="")
+        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace("day-select", "").trim() : x.className="")
       } 
   })
+}
+for(let y = 0; y < weekDay.length; y++){
+  weekDay[y].addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if((y == 0) || (y == 6)){
+      weekDay[y].className = 'weekend';
+    }
+    else if(weekDay[y].className == '') {
+      weekDay[y].className = 'weekDay-leave';
+      //Gives you the days to work in the weekDay column
+      daysToWorkArray.filter((element) => y == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className += " leave-day" : x.className = "leave-day")
+    } 
+    else if (weekDay[y].className == 'weekDay-select') {
+      weekDay[y].className = 'weekDay-leave';
+      daysToWorkArray.filter((element) => y == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace('day-select', 'leave-day').trim() : x.className = "leave-day")
+    } 
+    else if (weekDay[y].className == "weekDay-leave") {
+      weekDay[y].className = "";
+      daysToWorkArray.filter((element) => y == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = x.className.replace("leave-day", "").trim() : x.className="")
+    } 
+})
 }
 
 const ifMonthEqual = () => { 
@@ -189,20 +229,100 @@ function firstMessage(){
 
 document.getElementById("counter").addEventListener("click", counterDays)
 
-const arrow = document.getElementById('arrow');
+const arrow = document.querySelector('#arrow');
 
 arrow.addEventListener("click",function(){
   if(arrow.innerText=='>'){
   document.querySelector('.guide-container').style.left='0rem';
   arrow.style.left="0rem"
-  arrow.innerText='<'
+  arrow.children[0].innerText='<'
+  document.querySelector('.guide-arrow-container').style.borderRadius='80% 0% 0% 80%';
   }
   else{
-    document.querySelector('.guide-container').style.left='-35rem';
-    arrow.style.left="-35rem"
-    arrow.innerText='>'
+    document.querySelector('.guide-container').style.left="-39rem";
+    arrow.style.left="-39rem"
+    arrow.children[0].innerText='>'
+    document.querySelector('.guide-arrow-container').style.borderRadius= '0% 80% 80% 0%';
   }
 })
 
+window.addEventListener("load", (event) => {
+  if(arrow.innerText=='>'){
+    document.querySelector('.guide-container').style.left='0rem';
+    arrow.style.left="0rem"
+    arrow.children[0].innerText='<'
+    }
+    else{
+      document.querySelector('.guide-container').style.left="-39rem";
+      arrow.style.left="-39rem"
+      arrow.children[0].innerText='>'
+    }
+});
+
+// ==================== Code of SimonWeb to Selectable the divs ==================== //
+
+// ClickType -> To able the rigth click area selection of leave days. 
+//contrlClickRight -> To not right click after a area selection
+var clickType;
+var controlClickRight = '';
+
+const selection = new SelectionArea({
+  selectables: ['.days div:not([class="prev-month"], [class="next-month"], [class*="no-work"])'],
+  boundaries: ['.days'],
+  behaviour: {
+    overlap: 'drop'
+  },
+  features:{
+    singleTap: {
+      allow:false
+    }
+  }
+}).on('beforestart', (event) => {
+  const allowedButtons = [
+      // See https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
+      1, // left click
+      2, // right click
+      // 4, // mouse wheel / middle button
+  ];
+  if(event.event.buttons == 1){
+    clickType = "left";
+  }else if(event.event.buttons == 2){
+    clickType = "right";
+    controlClickRight = true;
+  }
+}).on('move', ({store: {changed: {added, removed}}}, event) => {
+  console.log(added)
+  if(clickType == "left"){
+    for (const el of added) {
+      if (el.className == ""){
+        el.className = "day-select"
+      } 
+      else if(el.className == "today"){
+        el.className += " day-select"
+      }
+      else if(el.className.includes("day-select")){ 
+        el.className = el.className.replace('day-select', '').trim()
+      }
+      else if(el.className.includes("leave-day")){ 
+        el.className = el.className.replace('leave-day', 'day-select').trim()
+      }
+    }
+  }else if(clickType = "right"){
+    for (const el of added) {
+      if (el.className == ""){
+        el.className = "leave-day"
+      } 
+      else if(el.className == "today"){
+        el.className += " leave-day"
+      }
+      else if(el.className.includes("leave-day")){ 
+        el.className = el.className.replace('leave-day', '').trim()
+      }
+      else if(el.className.includes("day-select")){ 
+        el.className = el.className.replace('day-select', 'leave-day').trim()
+      }
+    }
+  }
+});
 
 
