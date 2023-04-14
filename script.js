@@ -135,7 +135,7 @@ for(let z = 0; z < weekDay.length; z++){
       else if(weekDay[z].className == '') {
         weekDay[z].className = 'weekDay-select';
         //Gives you the days to work in the weekDay column
-        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className += " day-select" : x.className = "day-select")
+        daysToWorkArray.filter((element) => z == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = "today day-select" : x.className = "day-select")
       } 
       else if (weekDay[z].className == 'weekDay-leave') {
         weekDay[z].className = 'weekDay-select';
@@ -156,7 +156,7 @@ for(let y = 0; y < weekDay.length; y++){
     else if(weekDay[y].className == '') {
       weekDay[y].className = 'weekDay-leave';
       //Gives you the days to work in the weekDay column
-      daysToWorkArray.filter((element) => y == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className += " leave-day" : x.className = "leave-day")
+      daysToWorkArray.filter((element) => y == new Date(date.getFullYear(), date.getMonth(), element.innerText).getDay()).forEach(x=>x.className.includes("today") ? x.className = "today leave-day" : x.className = "leave-day")
     } 
     else if (weekDay[y].className == 'weekDay-select') {
       weekDay[y].className = 'weekDay-leave';
@@ -351,4 +351,5 @@ const selection = new SelectionArea({
     }
   }
 });
+
 
