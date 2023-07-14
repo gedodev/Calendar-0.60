@@ -165,7 +165,7 @@ body{
   align-items: center;
 }
 
-#counter {
+.button {
   background: #167e56;
   cursor: pointer;
   border: none;
@@ -312,7 +312,9 @@ aside{
   border-radius: 0.1em;
 }
 
-
-
-
-
+.rubber{
+  display: inline-block;
+  border: none;
+  border-radius: 20% 20% 20% 20%;
+  background-image: url('https://i.pinimg.com/originals/42/77/47/427747c252ef795b0a816e8d9a87b744.png');
+}
