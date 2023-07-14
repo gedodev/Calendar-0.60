@@ -297,7 +297,6 @@ aside{
   justify-content: center;
   align-items: center;
   position: relative;
-  left: -38rem;
   cursor: pointer;
   transition: 1s;
   animation:scale-up-horizontal-left 1.1s 
