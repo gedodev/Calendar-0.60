@@ -69,6 +69,16 @@ const renderCalendar = () => {
 
   /* ====== End Print ====== */
 
+  // Rubber
+  document.querySelector('#rubber').addEventListener("click",function(){
+    console.log('works')
+    console.log(document.querySelectorAll('.days > *'));
+    document.querySelectorAll('.days > *').forEach(function(i){
+      i.className = i.className.replace('leave-day', '').trim();
+      i.className = i.className.replace('day-select', '').trim();
+    })
+  })
+
   //WeekEnd (It is w-1 in the array because the for, start in 1 and the array start in 0)
   currentMonthDays = document.querySelectorAll('.days div:not([class="prev-month"], [class="next-month"])');
   for(let w = 0; w < currentMonthDays.length; w++){
@@ -80,6 +90,7 @@ const renderCalendar = () => {
       currentMonthDays[w].className += ' no-work';
     }
   }
+  
 
   //Add the day-select class and event listener in each day
   daysToWork = document.querySelectorAll('.days div:not([class="prev-month"], [class="next-month"], [class*="no-work"])');
@@ -120,6 +131,8 @@ const renderCalendar = () => {
     
   
   daysToWorkArray = Array.from(daysToWork);
+
+  
 }
 
 // To prevent the right click context menu
@@ -297,12 +310,6 @@ const selection = new SelectionArea({
       else if(el.className == "today"){
         el.className += " day-select"
       }
-      else if(el.className.includes("day-select")){ 
-        el.className = el.className.replace('day-select', '').trim()
-      }
-      else if(el.className.includes("leave-day")){ 
-        el.className = el.className.replace('leave-day', 'day-select').trim()
-      }
     }
     for (const el of removed) {
       if (el.className == ""){
@@ -326,12 +333,6 @@ const selection = new SelectionArea({
       else if(el.className == "today"){
         el.className += " leave-day"
       }
-      else if(el.className.includes("leave-day")){ 
-        el.className = el.className.replace('leave-day', '').trim()
-      }
-      else if(el.className.includes("day-select")){ 
-        el.className = el.className.replace('day-select', 'leave-day').trim()
-      }
     }
     for (const el of removed) {
       if (el.className == ""){
@@ -349,5 +350,6 @@ const selection = new SelectionArea({
     }
   }
 });
+
 
 
