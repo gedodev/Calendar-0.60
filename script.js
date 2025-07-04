@@ -310,10 +310,6 @@ const selection = new SelectionArea({
       else if(el.className == "today"){
         el.className += " day-select"
       }
-      else if(el.className.includes("day-select")){ 
-        el.className = el.className.replace('day-select', '').trim()
-      }
-      
     }
     for (const el of removed) {
       if (el.className == ""){
