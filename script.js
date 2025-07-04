@@ -350,6 +350,3 @@ const selection = new SelectionArea({
     }
   }
 });
-
-
-
